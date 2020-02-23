@@ -4,9 +4,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This repository houses the front-end code for the eView application developed in Angular 9.o
+* 0.1
 
 ### How do I get set up? ###
 
