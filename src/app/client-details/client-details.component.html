@@ -1,0 +1,40 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <form f2="ngForm" class="form-horizontal" novalidate (ngSubmit)="onSubmit()">
+                        <div class="card-header ">
+                            <h4 class="card-title">Client Details</h4>
+                        </div>
+                        <div class="card-body">
+                            <p>client-details works!</p>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Client Name
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" id="cn" ([ngModel])="client.ClientName"
+                                            required name="cn" cn="ngModel">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">
+                                        Client Address
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" id="ca" ([ngModel])="client.ClientAddress"
+                                            required name="ca" ca="ngModel">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
