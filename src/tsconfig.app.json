@@ -1,20 +1,24 @@
 {
-  "compilerOptions": {
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "outDir": "../out-tsc/app",
-    "module": "esnext",
-    "baseUrl": "",
-    "types": []
-  },
+    "compilerOptions": {
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "outDir": "../out-tsc/app",
+        "module": "esnext",
+        "baseUrl": "",
+        "types": [],
+        "paths": {
+            "@app/*": [ "app/*" ],
+            "@environments/*": [ "environments/*" ]
+        }
+    },
   "files": [
     "main.ts",
     "polyfills.ts"

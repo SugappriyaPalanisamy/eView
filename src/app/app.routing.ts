@@ -3,25 +3,39 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
-
+import { LoginComponent } from './login';
+import { AuthGuard } from './_helpers';
+import { Role } from './_models';
 export const AppRoutes: Routes = [{
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full',
+        pathMatch: 'full'
       },{
         path: '',
         component: AdminLayoutComponent,
         children: [{
             path: '',
-            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+            canActivate: [AuthGuard]
+            
         },
         {
             path: 'clients',
-            loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule)
+            loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule),
+            canActivate: [AuthGuard],
+            data: {
+                roles: [Role.Admin],
+                validatePermission: true
+            }
         },
         {
             path: 'zones',
-            loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule)
+            loadChildren: () => import('./zones/zones.module').then(m => m.ZonesModule),
+            canActivate: [AuthGuard],
+            data: {
+                roles: [Role.Admin],
+                validatePermission: true
+            }
         },
         {
             path: 'clientdetails/:id', component: ClientDetailsComponent
@@ -54,8 +68,13 @@ export const AppRoutes: Routes = [{
         },{
             path: '',
             loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule)
-        }]
-        },{
+            }]
+    },
+    {
+        path: 'login',
+        component: LoginComponent
+    },
+    {
             path: '',
             component: AuthLayoutComponent,
             children: [{

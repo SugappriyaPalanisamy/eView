@@ -1,4 +1,6 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
+import { AuthenticationService } from '@app/_services';
+import { User, Role } from '@app/_models';
 
 //Metadata
 export interface RouteInfo {
@@ -9,6 +11,7 @@ export interface RouteInfo {
     icontype: string;
     // icon: string;
     children?: ChildrenItems[];
+    validatePermission?: boolean ;
 }
 
 export interface ChildrenItems {
@@ -28,7 +31,9 @@ export const ROUTES: RouteInfo[] = [{
         path: '/clients',
         title: 'Clients',
         type: 'link',
-        icontype: 'nc-icon nc-bank'
+        icontype: 'nc-icon nc-bank',
+        validatePermission:true
+
     },{
         path: '/venues',
         title: 'Venues',
@@ -38,7 +43,9 @@ export const ROUTES: RouteInfo[] = [{
         path: '/zones',
         title: 'Zones',
         type: 'link',
-        icontype: 'nc-icon nc-layout-11'
+        icontype: 'nc-icon nc-layout-11',
+        validatePermission: true
+
     }
     ,
     {
@@ -131,6 +138,11 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent {
     public menuItems: any[];
+    currentUser: User;
+
+    constructor( private authenticationService: AuthenticationService) {
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    }
     isNotMobileMenu(){
         if( window.outerWidth > 991){
             return false;
@@ -143,4 +155,8 @@ export class SidebarComponent {
     }
     ngAfterViewInit(){
     }
+    verifyPermission(path) {
+        return this.currentUser && !this.currentUser.permissions.findIndex(e => e.objectName === path.substring(1));
+    }
+
 }

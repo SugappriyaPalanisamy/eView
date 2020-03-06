@@ -3,6 +3,7 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthenticationService } from '@app/_services';
 
 var misc:any ={
     navbar_menu_visible: 0,
@@ -24,10 +25,10 @@ export class NavbarComponent implements OnInit{
     private sidebarVisible: boolean;
     private _router: Subscription;
     public open: boolean = false;
-
+    
     @ViewChild("navbar-cmp") button;
-
-    constructor(location:Location, private renderer : Renderer2, private element : ElementRef, private router: Router) {
+   
+    constructor(location:Location, private renderer: Renderer2, private element: ElementRef, private router: Router, private authenticationService: AuthenticationService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -143,5 +144,9 @@ export class NavbarComponent implements OnInit{
     getPath(){
         // console.log(this.location);
         return this.location.prepareExternalUrl(this.location.path());
+    }
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/login']);
     }
 }
