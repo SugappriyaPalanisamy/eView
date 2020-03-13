@@ -26,6 +26,8 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { LoginComponent } from './login';
 
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive'; // this includes the core NgIdleModule but includes keepalive providers for easy wireup
+import { MomentModule } from 'angular2-moment'; // optional, provides moment-style pipes for date formatting
 
 @NgModule({
     imports:      [
@@ -41,7 +43,9 @@ import { LoginComponent } from './login';
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedPluginModule
+        FixedPluginModule,
+        NgIdleKeepaliveModule.forRoot(),
+        MomentModule
     ],
     declarations: [
         AppComponent,

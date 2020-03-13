@@ -1,1 +1,21 @@
 <router-outlet></router-outlet>
+
+<ng-template #childModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">You Have Been Idle!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        {{idleState}}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Stay</button>
+        <button type="button" class="btn btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+</ng-template>
+
+<!--<button class="btn btn-lg btn-outline-primary" (click)="open(childModal)">Open My Modal</button>-->
+
+

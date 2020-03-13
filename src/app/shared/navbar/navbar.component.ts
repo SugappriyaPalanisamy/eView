@@ -3,7 +3,9 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
+
 import { AuthenticationService } from '@app/_services';
+import { User } from '@app/_models';
 
 var misc:any ={
     navbar_menu_visible: 0,
@@ -25,6 +27,7 @@ export class NavbarComponent implements OnInit{
     private sidebarVisible: boolean;
     private _router: Subscription;
     public open: boolean = false;
+    currentUser: User;
     
     @ViewChild("navbar-cmp") button;
    
@@ -32,6 +35,7 @@ export class NavbarComponent implements OnInit{
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
+        this.currentUser = this.authenticationService.currentUserValue;
     }
 
     ngOnInit(){
