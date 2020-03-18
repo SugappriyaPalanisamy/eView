@@ -1,20 +1,22 @@
 ﻿import { Role } from "./role";
 
-export interface permissions {
+export interface Permissions {
     objectName: string;
     permission: string;
 }
-
-export class User {
-    id: number;
-    username: string;
-    password: string;
+export interface UserInfo {
     firstName: string;
     lastName: string;
+    userName: string;
+    password: string;
+    emailAddress: string;
     clientId?: number;
     venueId?: number;
-    zoneId?:number
+    zoneId?: number
+}
+export class User {
+    user: UserInfo;
     role: Role;
     token?: string;
-    permissions?: Array<permissions>;
+    effectivePermissions?: Array<Permissions>;
 }

@@ -1,7 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { AuthenticationService, UserService } from '@app/_services';
+import { AuthenticationService } from '@app/_services';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
@@ -18,7 +17,7 @@ export class AuthGuard implements CanActivate {
         
         if (currentUser) {
             if (route.data.validatePermission) {
-                if ( currentUser.permissions.findIndex(e => e.objectName === route.url[0].path)===-1) {
+                if (currentUser.effectivePermissions.findIndex(e => e.objectName === route.url[0].path)===-1) {
                     this.router.navigate(['/']);
                     return false;
                 }

@@ -20,7 +20,7 @@ export const AppRoutes: Routes = [{
             
         },
         {
-            path: 'clients',
+            path: 'ClientList',
             loadChildren: () => import('./clients/clients.module').then(m => m.ClientsModule),
             canActivate: [AuthGuard],
             data: {

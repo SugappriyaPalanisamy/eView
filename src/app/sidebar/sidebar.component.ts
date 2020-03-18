@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { AuthenticationService } from '@app/_services';
-import { User, Role } from '@app/_models';
+import { User } from '@app/_models';
 
 //Metadata
 export interface RouteInfo {
@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'nc-icon nc-app'
     },{
-        path: '/clients',
+        path: '/ClientList',
         title: 'Clients',
         type: 'link',
         icontype: 'nc-icon nc-bank',
@@ -141,7 +141,7 @@ export class SidebarComponent {
     currentUser: User;
 
     constructor( private authenticationService: AuthenticationService) {
-        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);       
     }
     isNotMobileMenu(){
         if( window.outerWidth > 991){
@@ -156,7 +156,7 @@ export class SidebarComponent {
     ngAfterViewInit(){
     }
     verifyPermission(path) {
-        return this.currentUser && !this.currentUser.permissions.findIndex(e => e.objectName === path.substring(1));
+        return this.currentUser && !this.currentUser.effectivePermissions.findIndex(e => e.objectName === path.substring(1));
     }
 
 }

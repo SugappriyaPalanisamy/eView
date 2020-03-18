@@ -21,22 +21,21 @@ export class AuthenticationService {
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
-
+    
     login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
+        return this.http.get<User>(`${environment.apiUrl}/users/Auth?userName=`+username+`&password=`+password+`&clientId=eViewPortal`)
+            .pipe(map(response => {
                 // login successful if there's a jwt token in the response
-                if (user && user.token) {
+                if (response && response['token']) {
                     // store user details and jwt token in session storage to keep user logged in between page refreshes
-                    sessionStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
+                    sessionStorage.setItem('currentUser', JSON.stringify(response));
+                    this.currentUserSubject.next(response);
                     this.userLoggedIn.next(true);
                 }
 
-                return user;
+                return response;
             }));
     }
-
     logout() {
         // remove user from session storage to log user out
         sessionStorage.removeItem('currentUser');

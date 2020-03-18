@@ -8,8 +8,6 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
 
 import { AppComponent }   from './app.component';
 
@@ -57,8 +55,7 @@ import { MomentModule } from 'angular2-moment'; // optional, provides moment-sty
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
-        // provider used to create fake backend
-        fakeBackendProvider
+        
     ],
     bootstrap:    [ AppComponent ]
 })
